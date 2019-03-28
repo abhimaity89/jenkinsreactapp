@@ -7,6 +7,12 @@ pipeline {
         echo 'NPM Packages have been loaded'
       }
     }
+    stage('Test') {
+      steps {
+        sh 'bash ./jenkins/scripts/test.sh'
+        input(message: 'Is test successfull?Ready and continue?', ok: 'Yes and continue to publish')
+      }
+    }
   }
   environment {
     CI = 'true'
